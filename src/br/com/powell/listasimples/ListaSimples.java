@@ -1,24 +1,42 @@
 package br.com.powell.listasimples;
 
-import android.os.Bundle;
+import java.util.ArrayList;
+
 import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class ListaSimples extends Activity {
+	
+	private ListView listaSimples;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_simples);
+        
+        listaSimples = (ListView) findViewById(R.id.listView1);
+        ArrayList<String> guitarras = criaNomeDeGuitarras();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
+        		android.R.layout.simple_list_item_1, guitarras);
+        listaSimples.setAdapter(adapter);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.lista_simples, menu);
-        return true;
-    }
-
+	private ArrayList<String> criaNomeDeGuitarras() {
+		ArrayList<String> guitarras = new ArrayList<String>();
+		
+		guitarras.add("Tagima");
+		guitarras.add("Fender");
+		guitarras.add("Gibson");
+		guitarras.add("Jackson");
+		guitarras.add("Ibanez");
+		guitarras.add("Tonante");
+		guitarras.add("Gianini");
+		guitarras.add("Epiphone");
+		guitarras.add("Memphis");
+		return guitarras;
+		
+	}
     
 }
