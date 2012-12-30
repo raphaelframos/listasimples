@@ -20,12 +20,14 @@ public class ListaSimples extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_simples);
         
-        listaSimples = (ListView) findViewById(R.id.listView1);
+        atribuiView();
         definindoAdaptador();
+        
         listaSimples.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> item, View arg1, int posicao,
 					long arg3) {
+				//Seleciona o item da lista, retornando o objeto do adapter, no caso um String
 				String guitarra = (String) item.getItemAtPosition(posicao);
 				Toast.makeText(ListaSimples.this, "Eu gosto da guitarra: " + guitarra, 
 						Toast.LENGTH_LONG).show();
@@ -33,14 +35,21 @@ public class ListaSimples extends Activity {
 		});
     }
 
+	private void atribuiView() {
+		listaSimples = (ListView) findViewById(R.id.listView1);
+	}
+
 	private void definindoAdaptador() {
-		ArrayList<String> guitarras = criaNomeDeGuitarras();
+		
+		ArrayList<String> guitarras = criaListaDeNomesDeGuitarras();
+		
+		//Cria o adapter para a lista 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
         		android.R.layout.simple_list_item_1, guitarras);
         listaSimples.setAdapter(adapter);
 	}
 
-	private ArrayList<String> criaNomeDeGuitarras() {
+	private ArrayList<String> criaListaDeNomesDeGuitarras() {
 		ArrayList<String> guitarras = new ArrayList<String>();
 		
 		guitarras.add("Tagima");
